@@ -1,10 +1,15 @@
-from pydantic import Basemodel
+from pydantic import BaseModel
 
-class Todo(BaseModel):
-    id: int
-    title: str
-    description: str
-    completed: bool
+class TodoBase(BaseModel):
+    title : str
+    description : str | None = None
+    completed : bool = False
+    
+class TodoCreate(TodoBase):
+    pass
 
-    class Config:
-        orm_mode = True
+class Todo(TodoBase):
+    id : int
+    
+    class config:
+        orm_mode =True
